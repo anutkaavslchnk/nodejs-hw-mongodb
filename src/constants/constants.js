@@ -7,3 +7,8 @@ export const BD_VARS={
     MONGODB_URL:'MONGODB_URL',
     MONGODB_DB:'MONGODB_DB',
 };
+
+export const SORT={
+    ASC:'asc',
+    DESC:'desc',
+};
