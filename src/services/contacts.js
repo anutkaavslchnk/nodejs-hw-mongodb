@@ -51,12 +51,8 @@ export const patchContact=async(contactId, payload, options={})=>{
     const rawResult=await contactsModel.findOneAndUpdate({ _id: contactId }, payload,
         {
             new:true,
-            includeResultMetadata:true,
             ...options,
         });
     if(!rawResult) return null;
-    return{
-        contact:rawResult.value,
-        isNew:!rawResult.lastErrorObject.updatedExisting,
-    };
+    return rawResult;
 };

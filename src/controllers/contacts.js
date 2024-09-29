@@ -45,7 +45,7 @@ export const createStudentsController=async(req,res)=>{
 };
 
 
-export const deleteContactController=async(req, res)=>{
+export const deleteContactController=async(req, res, next)=>{
     const {contactId}=req.params;
     const contact=await deleteContact(contactId);
     if(!contact){
@@ -65,7 +65,7 @@ export const patchContactController = async (req, res, next) => {
 
         const contact = await patchContact(id, body);
 
-        if (!contact|| !contact.contact) {
+        if (!contact) {
             return next(createHttpError(404, 'Contact not found'));
         }
 
