@@ -18,10 +18,10 @@ import { authenticate } from '../middlewares/authenticate.js';
 const router=Router();
 
 router.use(authenticate);
-router.get('/contacts', ctrlWrapper(getContactsController));
-router.get('/contacts/:contactId', isValidId, ctrlWrapper(getContactsByIdController));
-router.post('/contacts', validateBody(createContactSchema), ctrlWrapper(createStudentsController));
+router.get('/', ctrlWrapper(getContactsController));
+router.get('/:contactId', isValidId, ctrlWrapper(getContactsByIdController));
+router.post('/', validateBody(createContactSchema), ctrlWrapper(createStudentsController));
 router.post('/register', validateBody(createUserSchema), ctrlWrapper(registerUserController));
-router.delete('/contacts/:contactId',isValidId, ctrlWrapper(deleteContactController));
-router.patch('/contacts/:contactId', validateBody(updatedContactSchema), ctrlWrapper(patchContactController));
+router.delete('/:contactId',isValidId, ctrlWrapper(deleteContactController));
+router.patch('/:contactId', validateBody(updatedContactSchema), ctrlWrapper(patchContactController));
 export default router;

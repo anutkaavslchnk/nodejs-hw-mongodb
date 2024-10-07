@@ -33,17 +33,20 @@ if(filter.type){
         ...paginationData,
     };
 };
-export const getContactById=async(contactId)=>{
-    const contact=await contactsModel.findById(contactId);
+export const getContactById=async(contactId,userId)=>{
+    const contact=await contactsModel.findOne({_id:contactId, userId});
     return contact;
 };
-export const createContact=async(payload)=>{
-    const contact=await contactsModel.create(payload);
+export const createContact=async(req)=>{
+   const {_id:userId}=req.user;
+    const contact=await contactsModel.create(...req.body, userId );
     return contact;
 }
-export const deleteContact=async(contactId)=>{
+export const deleteContact=async(contactId,userId)=>{
+    
     const contact=await contactsModel.findOneAndDelete({
         _id:contactId,
+        userId,
     });
     return contact;
 };
