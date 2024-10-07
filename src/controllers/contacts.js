@@ -24,10 +24,10 @@ filter.userId = req.user._id;
 
 export const getContactsByIdController=async (req, res, next)=>{
     const {contactId}=req.params;
-    const userId = req.user._id;
-    const contact = await getContactById(contactId, userId);
+    // const userId = req.user._id;
+    const contact = await getContactById(contactId);
     if (!contact) {
-throw createHttpError(404, 'Contact not found');
+next(createHttpError(404, 'Contact not found'));
         return ;
     }
     res.status(200).json({
@@ -37,7 +37,7 @@ throw createHttpError(404, 'Contact not found');
     });
 }
 export const createStudentsController=async(req,res)=>{
-    const { _id: userId } = req.user;
+    const userId = req.user._id;
     const contact=await createContact({...req.body, userId});
     res.status(201).json({
         status:201,

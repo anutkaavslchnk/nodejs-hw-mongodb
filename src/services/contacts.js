@@ -43,7 +43,7 @@ export const createContact=async(req)=>{
     return contact;
 }
 export const deleteContact=async(contactId,userId)=>{
-    
+
     const contact=await contactsModel.findOneAndDelete({
         _id:contactId,
         userId,
