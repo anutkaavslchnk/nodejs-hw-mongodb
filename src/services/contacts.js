@@ -37,11 +37,10 @@ export const getContactById=async(contactId,userId)=>{
     const contact=await contactsModel.findOne({_id:contactId, userId});
     return contact;
 };
-export const createContact=async(req)=>{
-   const {_id:userId}=req.user;
-    const contact=await contactsModel.create(...req.body, userId );
+export const createContact = async ({ body, userId }) => {
+    const contact = await contactsModel.create({ ...body, userId });
     return contact;
-}
+};
 export const deleteContact=async(contactId,userId)=>{
 
     const contact=await contactsModel.findOneAndDelete({

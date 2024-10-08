@@ -38,7 +38,7 @@ next(createHttpError(404, 'Contact not found'));
 }
 export const createStudentsController=async(req,res)=>{
     const userId = req.user._id;
-    const contact=await createContact({...req.body, userId});
+    const contact=await createContact({body:req.body, userId});
     res.status(201).json({
         status:201,
         message:`Successfully created a contact!`,
@@ -49,7 +49,7 @@ export const createStudentsController=async(req,res)=>{
 
 export const deleteContactController=async(req, res, next)=>{
     const {contactId}=req.params;
-    const userId=req.res._id;
+    const userId=req.user._id;
     const contact=await deleteContact(contactId, userId);
     if(!contact){
         next(createHttpError(404, 'Contact not found'));
