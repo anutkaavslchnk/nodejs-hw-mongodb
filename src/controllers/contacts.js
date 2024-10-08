@@ -24,8 +24,8 @@ filter.userId = req.user._id;
 
 export const getContactsByIdController=async (req, res, next)=>{
     const {contactId}=req.params;
-    // const userId = req.user._id;
-    const contact = await getContactById(contactId);
+    const userId = req.user._id;
+    const contact = await getContactById(contactId, userId);
     if (!contact) {
 next(createHttpError(404, 'Contact not found'));
         return ;
@@ -62,11 +62,11 @@ export const deleteContactController=async(req, res, next)=>{
 
 
 export const patchContactController = async (req, res, next) => {
-    const id = req.params.contactId;
+    const { contactId } = req.params;
     const { body } = req;
+    const userId = req.user._id;
 
-
-        const contact = await patchContact(id, body);
+        const contact = await patchContact(contactId, userId, body);
 
         if (!contact) {
             return next(createHttpError(404, 'Contact not found'));
