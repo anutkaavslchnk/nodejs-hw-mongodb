@@ -1,15 +1,26 @@
 import { ONE_DAY } from "../constants/constants.js";
 import { createSession, loginUser, logOutUser, refreshUsersSession, registerUser } from "../services/auth.js"
 
-export const registerUserController=async(req, res)=>{
-    const user=await registerUser(req.body);
+export const registerUserController = async (req, res) => {
+    try {
+        const user = await registerUser(req.body);
 
-    res.status(201).json({
-        status:201,
-        message:"Successfully registered a user!",
-        data:user,
-    });
-}
+
+        res.status(201).json({
+            status: 201,
+            message: "Successfully registered a user!",
+            data: user,
+        });
+     
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).json({
+            status: 500,
+            message: "Error registering user",
+        });
+    }
+};
+
 export const loginUserController=async(req, res)=>{
 
     const session = await loginUser(req.body);

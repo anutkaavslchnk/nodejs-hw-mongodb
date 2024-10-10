@@ -14,13 +14,14 @@ if(user) throw createHttpError(409, 'Email in use');
 
 const encryptedPassword=await bcrypt.hash(payload.password, 10);
 
-    return UserCollection.create({
-
+const newUser = await UserCollection.create({
     ...payload,
-    password:encryptedPassword,
+    password: encryptedPassword,
+});
 
-    });
-};
+const { password, ...userData } = newUser.toObject(); 
+return userData;
+}
 
 export const loginUser=async(payload)=>{
 const user=await UserCollection.findOne({email:payload.email});
