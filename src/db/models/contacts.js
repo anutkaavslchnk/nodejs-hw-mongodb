@@ -1,6 +1,9 @@
 import { model, Schema } from "mongoose";
 
 const schema=new Schema({
+    photo:{
+        type:String,
+    },
 name:{
     type:String,
     required:true,
@@ -25,7 +28,7 @@ contactType:{
 userId:{
     type:Schema.Types.ObjectId,
     ref:'users',
-    required: true 
+    required: true
 }
 },
 {

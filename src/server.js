@@ -1,7 +1,7 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
-import { PORT_VAR } from './constants/constants.js';
+import { PORT_VAR, UPLOAD_DIR } from './constants/constants.js';
 import { env } from './utils/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
@@ -30,10 +30,11 @@ export const setupServer = () => {
         }),
     );
 
+
     app.post('/auth/send-reset-email', async (req, res) => {
 
         try {
-            const { email } = req.body; 
+            const { email } = req.body;
             if (!email) {
                 return res.status(400).json({ message: "Email is required" });
             }
@@ -47,7 +48,7 @@ export const setupServer = () => {
     });
 app.use(router);
 
-
+app.use('/uploads', express.static(UPLOAD_DIR));
 
 app.use('*', notFoundHandler);
 app.use(errorHandler);
