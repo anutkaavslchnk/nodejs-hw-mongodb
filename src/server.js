@@ -7,6 +7,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import router from './routers/index.js';
 import cookieParser from 'cookie-parser';
+import { requestResetEmail } from './services/auth.js';
 
 const PORT = Number(env(PORT_VAR.PORT), '3000');
 
@@ -29,6 +30,21 @@ export const setupServer = () => {
         }),
     );
 
+    app.post('/auth/send-reset-email', async (req, res) => {
+
+        try {
+            const { email } = req.body; 
+            if (!email) {
+                return res.status(400).json({ message: "Email is required" });
+            }
+
+            await requestResetEmail(email);
+            res.status(200).json({ message: "Reset email sent" });
+        } catch (error) {
+            console.error("Error details:", error);
+            res.status(500).json({ message: "Something went wrong", error: error.message });
+        }
+    });
 app.use(router);
 
 

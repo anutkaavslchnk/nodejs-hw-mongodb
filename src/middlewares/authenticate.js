@@ -1,7 +1,6 @@
-import createHttpError from "http-errors";
 import { SessionCollection } from "../db/models/session.js";
 import { UserCollection } from "../db/models/user.js";
-
+import createHttpError from "http-errors";
 export const authenticate = async (req, res, next) => {
   const authHeader = req.get('Authorization');
 
@@ -32,6 +31,8 @@ export const authenticate = async (req, res, next) => {
   if (!user) {
     return next(createHttpError(401, 'User not found'));
   }
+
+
 
   req.user = user;
 

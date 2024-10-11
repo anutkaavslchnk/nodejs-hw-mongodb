@@ -1,8 +1,8 @@
 import { ONE_DAY } from "../constants/constants.js";
-import { createSession, loginUser, logOutUser, refreshUsersSession, registerUser } from "../services/auth.js"
+import { createSession, loginUser, logOutUser, refreshUsersSession, registerUser, requestResetEmail, resetPassword } from "../services/auth.js"
 
 export const registerUserController = async (req, res) => {
-    try {
+
         const user = await registerUser(req.body);
 
 
@@ -11,14 +11,8 @@ export const registerUserController = async (req, res) => {
             message: "Successfully registered a user!",
             data: user,
         });
-     
-    } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(500).json({
-            status: 500,
-            message: "Error registering user",
-        });
-    }
+
+    
 };
 
 export const loginUserController=async(req, res)=>{
@@ -83,3 +77,20 @@ export const refreshUserSessionController=async(req,res)=>{
         },
     });
 };
+
+export const requestResetEmailController=async(res, req)=>{
+    await requestResetEmail(req.body.email);
+    res.json({
+        status:200,
+        message:'Reset password email was successfully sent!',
+        data:{},
+    })
+}
+export const resetPasswordController=async(req,res)=>{
+    await resetPassword(req.body);
+    res.json({
+        message:"Password was successfully reset!",
+        status:200,
+        data:{},
+    })
+}

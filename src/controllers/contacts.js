@@ -7,16 +7,16 @@ import { parseFilterParams } from "../utils/parseFilterParams.js";
 export const getContactsController = async (req, res, next) => {
     const { page, perPage } = parsePaginationParams(req.query);
     const { sortOrder, sortBy } = parseSortParams(req.query);
-    const filter = parseFilterParams(req.query);
+    const {filter} = parseFilterParams(req.query);
 
-
-    filter.userId = req.user._id;
-
-
-
+    const userId = req.user._id;
+    console.log("User ID in request:", userId);
+    if (!userId) {
+        return next(createHttpError(401, 'User ID not found in request'));
+      }
     try {
         const contacts = await getAllContacts({
-            page, perPage, sortOrder, sortBy, filter,
+            page, perPage, sortOrder, sortBy, filter:{userId},
         });
 
         console.log("Fetched contacts:", contacts);
