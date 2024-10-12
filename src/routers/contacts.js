@@ -21,7 +21,7 @@ const router=Router();
 router.use(authenticate);
 router.get('/', ctrlWrapper(getContactsController));
 router.get('/:contactId', isValidId, ctrlWrapper(getContactsByIdController));
-router.post('/', validateBody(createContactSchema), ctrlWrapper(createStudentsController), upload.single('photo'));
+router.post('/', upload.single('photo'), validateBody(createContactSchema), ctrlWrapper(createStudentsController));
 router.post('/register', validateBody(createUserSchema), ctrlWrapper(registerUserController));
 router.delete('/:contactId',isValidId, ctrlWrapper(deleteContactController));
 router.patch('/:contactId', upload.single('photo'), validateBody(updatedContactSchema), ctrlWrapper(patchContactController));

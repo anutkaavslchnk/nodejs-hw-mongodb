@@ -42,14 +42,46 @@ throw createHttpError(404, 'Contact not found');
         data: contact,
     });
 }
-export const createStudentsController=async(req,res)=>{
-    const contact=await createContact(req.body);
-    res.status(201).json({
-        status:201,
-        message:`Successfully created a contact!`,
-        data:contact,
-    });
-};
+
+
+export const createStudentsController = async (req, res, next) => {
+
+
+
+      const photo = req.file;
+
+      let photoUrl;
+
+      console.log('Request Body:', req.body);
+      console.log('Photo URL:', photoUrl);
+
+      if (photo) {
+        if (process.env.ENABLE_CLOUDINARY === 'true') {
+          photoUrl = await saveFileToCloudinary(photo);
+        } else {
+          photoUrl = await saveFileToUploadDir(photo);
+        }
+      }
+
+
+      try {
+        const userId = req.user._id;
+        const contact = await createContact({
+            body:req.body,
+            photo: photoUrl || req.body.photo,
+            userId
+          });
+
+        res.status(201).json({
+            status: 201,
+            message: 'Successfully created a contact!',
+            data: contact,
+          });
+    } catch (error) {
+        next(error);
+    }
+  };
+
 
 
 
