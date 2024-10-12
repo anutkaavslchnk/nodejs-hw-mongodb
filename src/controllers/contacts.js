@@ -53,7 +53,7 @@ export const createStudentsController = async (req, res, next) => {
       let photoUrl;
 
       console.log('Request Body:', req.body);
-      console.log('Photo URL:', photoUrl);
+
 
       if (photo) {
         if (process.env.ENABLE_CLOUDINARY === 'true') {
@@ -63,6 +63,7 @@ export const createStudentsController = async (req, res, next) => {
         }
       }
 
+      console.log('Photo URL:', photoUrl);
 
       try {
         const userId = req.user._id;

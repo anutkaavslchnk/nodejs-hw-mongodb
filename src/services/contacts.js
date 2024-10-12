@@ -54,8 +54,8 @@ export const getContactById=async(contactId,userId)=>{
 };
 
 
-export const createContact = async ({ body, userId }) => {
-    const contact = await contactsModel.create({ ...body, userId });
+export const createContact = async ({ body, userId, photo }) => {
+    const contact = await contactsModel.create({ ...body, userId, photo });
     console.log("Creating contact with userId:", userId);
     return contact;
 };
