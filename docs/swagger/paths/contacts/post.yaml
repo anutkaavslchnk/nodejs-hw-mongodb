@@ -31,18 +31,10 @@ requestBody:
             description: "Contact's email"
             type: string
             example: 'abcde@gmail.com'
-          onDuty:
-            description: 'Whether the contact is on duty'
-            type: boolean
-            example: false
-          age:
-            description: "Student's age"
-            type: number
-            example: 12
-          gender:
-            description: "Student's gender"
+          contactType:
+            description: "Contact's contact type"
             type: string
-            enum: ['male', 'female', 'other']
+            enum: ['home', 'personal']
           photo:
             description: "Contact's photo"
             type: string

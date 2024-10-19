@@ -13,25 +13,33 @@ parameters:
       type: string
       example: '65ca67e7ae7f10c88b598384'
       description: The ID of the contact to be patched.
-  - in: query
-    name: name
-    schema:
-      type: string
-      example: 'John Doe'
-      description: The name of the contact to be updated.
-  - in: query
-    name: age
-    schema:
-      type: integer
-      example: 30
-      description: The age of the contact to be updated.
-  - in: query
-    name: gender
-    schema:
-      type: string
-      enum: ['male', 'female', 'other']
-      example: 'male'
-      description: The gender of the contact to be updated.
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            example: 'John Doe'
+            description: The name of the contact to be updated.
+          email:
+            type: string
+            example: 'hello@gmail.com'
+            description: The email of the contact to be updated.
+          phoneNumber:
+            type: string
+            example: '+38058595494'
+            description: The phone number of the contact to be updated.
+          contactType:
+            type: string
+            example: 'home'
+            description: The contact type of the contact to be updated.
+          isFavourite:
+            type: boolean
+            example: true
+            description: Whether the contact is a favourite.
 responses:
   '200':
     description: Successfully patched contact!

@@ -11,10 +11,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
-    },
-    {
-      "url": "https://example.com/api/v1"
+      "url": "https://nodejs-hw-mongodb-7-ewep.onrender.com"
     }
   ],
   "tags": [
@@ -78,19 +75,6 @@
               ],
               "example": "asc"
             }
-          },
-          {
-            "in": "query",
-            "name": "gender",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "male",
-                "female",
-                "other"
-              ],
-              "example": "male"
-            }
           }
         ],
         "responses": {
@@ -152,7 +136,7 @@
                           "type": "boolean",
                           "example": false
                         },
-                        "hasPreviousPage": {
+                        "hasPrevPage": {
                           "type": "boolean",
                           "example": true
                         }
@@ -211,23 +195,12 @@
                     "type": "string",
                     "example": "abcde@gmail.com"
                   },
-                  "onDuty": {
-                    "description": "Whether the contact is on duty",
-                    "type": "boolean",
-                    "example": false
-                  },
-                  "age": {
-                    "description": "Student's age",
-                    "type": "number",
-                    "example": 12
-                  },
-                  "gender": {
-                    "description": "Student's gender",
+                  "contactType": {
+                    "description": "Contact's contact type",
                     "type": "string",
                     "enum": [
-                      "male",
-                      "female",
-                      "other"
+                      "home",
+                      "personal"
                     ]
                   },
                   "photo": {
@@ -374,7 +347,7 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 200
+                      "example": 204
                     },
                     "message": {
                       "type": "string",
@@ -491,25 +464,6 @@
             "description": "Contact's email",
             "type": "string",
             "example": "abcde@gmail.com"
-          },
-          "onDuty": {
-            "description": "Whether the contact is on duty",
-            "type": "boolean",
-            "example": false
-          },
-          "age": {
-            "description": "Student's age",
-            "type": "number",
-            "example": 12
-          },
-          "gender": {
-            "description": "Student's gender",
-            "type": "string",
-            "enum": [
-              "male",
-              "female",
-              "other"
-            ]
           },
           "photo": {
             "description": "Link to contact's photo",

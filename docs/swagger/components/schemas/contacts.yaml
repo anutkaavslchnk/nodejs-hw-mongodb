@@ -24,18 +24,6 @@ properties:
     description: "Contact's email"
     type: string
     example: 'abcde@gmail.com'
-  onDuty:
-    description: 'Whether the contact is on duty'
-    type: boolean
-    example: false
-  age:
-    description: "Student's age"
-    type: number
-    example: 12
-  gender:
-    description: "Student's gender"
-    type: string
-    enum: ['male', 'female', 'other']
   photo:
     description: "Link to contact's photo"
     type: string
