@@ -16,7 +16,7 @@ parameters:
 requestBody:
   required: true
   content:
-    application/json:
+    multipart/form-data:
       schema:
         type: object
         properties:
@@ -26,20 +26,22 @@ requestBody:
             description: The name of the contact to be updated.
           email:
             type: string
-            example: 'hello@gmail.com'
+            example: 'abcde@gmail.com'
             description: The email of the contact to be updated.
           phoneNumber:
-            type: string
-            example: '+38058595494'
+            type: number
+            example: +380474904
             description: The phone number of the contact to be updated.
           contactType:
             type: string
             example: 'home'
+            enum: ['home', 'personal']
             description: The contact type of the contact to be updated.
           isFavourite:
             type: boolean
             example: true
             description: Whether the contact is a favourite.
+
 responses:
   '200':
     description: Successfully patched contact!
